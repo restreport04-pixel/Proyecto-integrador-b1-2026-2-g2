@@ -24,6 +24,7 @@ public class MainView extends VerticalLayout {
     private final Binder<Usuario> binder = new BeanValidationBinder<>(Usuario.class);
     private Usuario usuarioSeleccionado;
 
+    @SuppressWarnings("this-escape")
     public MainView(UsuarioDao usuarioDao) {
         this.usuarioDao = usuarioDao;
 

@@ -14,6 +14,10 @@ El proyecto se divide en varias capas para mantener un orden que son las siguien
 * Backend: Toda la funcion de logica y servicios.
 * Base de datos: Alamcenamiento y orden de datos entrantes en la plataforma web.
 
+## Diagrama MER
+A continuacion se muestra el modelo entidad-relacion de la base de datos
+> NOTA: pendiente subir imagen. A espera de que integrante de equipo de base de datos comparta el archivo.
+
 ## Stack Tecnologico
 * Lenguaje: Java.
 * Framework Principal: Spring boot.

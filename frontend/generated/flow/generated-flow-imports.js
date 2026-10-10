@@ -1,6 +1,7 @@
 import 'Frontend/generated/jar-resources/flow-component-renderer.js';
 import '@vaadin/polymer-legacy-adapter/style-modules.js';
 import 'Frontend/generated/jar-resources/vaadin-grid-flow-selection-column.js';
+import '@vaadin/email-field/src/vaadin-email-field.js';
 import '@vaadin/tooltip/src/vaadin-tooltip.js';
 import '@vaadin/context-menu/src/vaadin-context-menu.js';
 import 'Frontend/generated/jar-resources/contextMenuConnector.js';

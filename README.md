@@ -1,34 +1,14 @@
-# My Application README
+# Proyecto integrador B1-2026-2 G2
 
-- [ ] TODO Replace or update this README with instructions relevant to your application
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![Vaadin](https://img.shields.io/badge/Vaadin-00B4F0?style=for-the-badge&logo=vaadin&logoColor=white)
 
-To start the application in development mode, import it into your IDE and run the `Application` class. 
-You can also start the application from the command line by running: 
+## Resumen Ejecutivo
+Esta es una plataforma web para realizar la gestionarv los usuarios, recursos y reservas de un coworking.
+Sirve para llevar un control de los regristros desde una interfaz grafica sencilla que se conecta directamente a la base de datos.
 
-```bash
-./mvnw
-```
-
-To build the application in production mode, run:
-
-```bash
-./mvnw package
-```
-
-To build a Docker image, run:
-
-```bash
-docker build -t my-application:latest .
-```
-
-If you use commercial components, pass the license key as a build secret:
-
-```bash
-docker build --secret id=proKey,src=$HOME/.vaadin/proKey .
-```
-
-## Getting Started
-
-The [Quick Start](https://vaadin.com/docs/v25/getting-started/quick-start) tutorial helps you get started with Vaadin in 
-around 10 minutes. This tutorial walks you through building a simple application, introducing the core concepts along 
-the way.
+## Creditos del equipo de trabajo
+* Integrante 1: Jacob Vanegas Martinez - Base de datos 
+* Integrante 2: Thomas Restrepo Rodriguez - Front-end
+* Integrante 3: Brenda Sofia Rivero Reyes - Documentacion

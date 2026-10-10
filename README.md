@@ -63,7 +63,17 @@ Abre la terminal integrada en Visual Studio Code. Asegúrate de estar dentro de 
 
 6. Acceder al sistema
 Una vez que la consola deje de cargar y muestre que el sistema inició correctamente, abre tu navegador de internet e ingresa a:
-http://localhost:8080  
+http://localhost:8080
+
+## Flujo de trabajo  
+Para mantener el historial limpio, el equipo aplica las buenas practicas de "Conventional Commits".  
+Todo el trabajo se realiza en ramas secundarias antes de unirse a la rama "Main".  
+
+Es obligatorio usar los siguientes prefijos en cada commit:  
+* feat: Para crear nuevas funcionalidades. (Ej: feat(reservas): agregar boton)
+* fix: Para solucionar errores. (Ej: fix(login): corregir acceso)
+* docs: Para documentacion. (Ej: docs(readme): actualizar texto)
+* style: Para diseno. (Ej: style(ui): aplicar colores lumo)
    
 ## Licencia y creditos del equipo de trabajo  
 Este proyecto se distribuye bajo los terminos especificados en el archivo LICENSE.md incluido en la raiz del  repositorio.  

@@ -16,7 +16,7 @@ El proyecto se divide en varias capas para mantener un orden que son las siguien
 
 ## Diagrama MER
 A continuacion se muestra el modelo entidad-relacion de la base de datos
-> NOTA: pendiente subir imagen. A espera de que integrante de equipo de base de datos comparta el archivo.
+![Diagrama MER](.assets/diagrama-mer.png)
 
 ## Stack Tecnologico
 * Lenguaje: Java.

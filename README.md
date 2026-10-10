@@ -23,15 +23,15 @@ El proyecto se divide en varias capas para mantener un orden que son las siguien
 * Control de versiones: Git y GitHub.
 
 ## Guia de Configuracion local
-Para poder correr el proyecto en tu computador de manera local, haz lo siguiente:
-1. Clona el repositorio en la terminal (CMD O TERMINAL DE VSC).
+Para poder correr el proyecto en tu computador de manera local, haz lo siguiente:  
+1. Clona el repositorio en la terminal (CMD O TERMINAL DE VSC).  
    git clone https://github.com/restreport04-pixel/Proyecto-integrador-b1-2026-2-g2.git
-2. Entra a la carpeta del proyecto.
-   cd Proyecto-integrador-b1-2026-2-g2
-3. Abre el archivo src/main/resources/application.properties y pon el usuario y contraseña de tu base de datos local.
-4. Para encender el servidor, escribe este comando en la terminal.
-   ./mvnw spring-boot:run
-5. Ve a tu navegador y ya entras a: http://localhost:8080
+2. Entra a la carpeta del proyecto.  
+   cd Proyecto-integrador-b1-2026-2-g2  
+3. Abre el archivo src/main/resources/application.properties y pon el usuario y contraseña de tu base de datos local.  
+4. Para encender el servidor, escribe este comando en la terminal.  
+   ./mvnw spring-boot:run  
+5. Ve a tu navegador y ya entras a: http://localhost:8080  
    
 ## Creditos del equipo de trabajo
 * Integrante 1: Jacob Vanegas Martinez - Base de datos 

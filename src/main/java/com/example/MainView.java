@@ -8,7 +8,10 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
 
 @Route("")
@@ -16,104 +19,80 @@ public class MainView extends VerticalLayout {
 
     private final UsuarioDao usuarioDao;
     private final Grid<Usuario> grid = new Grid<>(Usuario.class, false);
-    private final TextField txtNombre = new TextField("Nombre");
-    private final TextField txtEmail = new TextField("Email");
+    private final TextField nombre = new TextField("Nombre");
+    private final EmailField email = new EmailField("Email");
+    private final Binder<Usuario> binder = new BeanValidationBinder<>(Usuario.class);
     private Usuario usuarioSeleccionado;
 
+    @SuppressWarnings("this-escape")
     public MainView(UsuarioDao usuarioDao) {
         this.usuarioDao = usuarioDao;
 
-        setSizeFull();
-        configureGrid();
-        configureForm();
-        refreshGrid();
-    }
+        binder.bindInstanceFields(this);
 
-    private void configureGrid() {
-        grid.addColumn(Usuario::getId).setHeader("ID").setAutoWidth(true);
+        grid.addColumn(Usuario::getId).setHeader("ID");
         grid.addColumn(Usuario::getNombre).setHeader("Nombre");
         grid.addColumn(Usuario::getEmail).setHeader("Email");
-        grid.setSizeFull();
 
         grid.asSingleSelect().addValueChangeListener(e -> {
             usuarioSeleccionado = e.getValue();
             if (usuarioSeleccionado != null) {
-                txtNombre.setValue(usuarioSeleccionado.getNombre());
-                txtEmail.setValue(usuarioSeleccionado.getEmail());
+                binder.readBean(usuarioSeleccionado);
             } else {
                 limpiarFormulario();
             }
         });
-    }
 
-    private void configureForm() {
-        Button btnGuardar = new Button("Guardar", e -> guardar());
-        btnGuardar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        Button guardarBtn = new Button("Guardar", e -> guardarUsuario());
+        guardarBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        Button btnActualizar = new Button("Actualizar", e -> actualizar());
-        Button btnEliminar = new Button("Eliminar", e -> eliminar());
-        btnEliminar.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        Button eliminarBtn = new Button("Eliminar", e -> eliminarUsuario());
+        eliminarBtn.addThemeVariants(ButtonVariant.LUMO_ERROR);
 
-        Button btnLimpiar = new Button("Limpiar", e -> limpiarFormulario());
+        Button limpiarBtn = new Button("Limpiar", e -> limpiarFormulario());
 
-        HorizontalLayout form = new HorizontalLayout(txtNombre, txtEmail, btnGuardar, btnActualizar, btnEliminar, btnLimpiar);
-        form.setVerticalComponentAlignment(Alignment.END, btnGuardar, btnActualizar, btnEliminar, btnLimpiar);
+        HorizontalLayout form = new HorizontalLayout(nombre, email, guardarBtn, eliminarBtn, limpiarBtn);
+        form.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
 
         add(form, grid);
+        actualizarGrid();
     }
 
-    private void guardar() {
-        if (validar()) {
-            Usuario u = new Usuario(null, txtNombre.getValue(), txtEmail.getValue());
-            usuarioDao.guardar(u);
-            Notification.show("Usuario guardado con éxito");
+    private void guardarUsuario() {
+        Usuario usuario = (usuarioSeleccionado != null) ? usuarioSeleccionado : new Usuario();
+        if (binder.writeBeanIfValid(usuario)) {
+            if (usuario.getId() == null) {
+                usuarioDao.guardar(usuario);
+                Notification.show("Usuario guardado con éxito");
+            } else {
+                usuarioDao.actualizar(usuario);
+                Notification.show("Usuario actualizado con éxito");
+            }
             limpiarFormulario();
-            refreshGrid();
+            actualizarGrid();
+        } else {
+            Notification.show("Por favor, corrige los errores en el formulario");
         }
     }
 
-    private void actualizar() {
-        if (usuarioSeleccionado == null) {
-            Notification.show("Selecciona un usuario de la tabla");
-            return;
-        }
-        if (validar()) {
-            usuarioSeleccionado.setNombre(txtNombre.getValue());
-            usuarioSeleccionado.setEmail(txtEmail.getValue());
-            usuarioDao.actualizar(usuarioSeleccionado);
-            Notification.show("Usuario actualizado con éxito");
+    private void eliminarUsuario() {
+        if (usuarioSeleccionado != null) {
+            usuarioDao.eliminar(usuarioSeleccionado.getId());
+            Notification.show("Usuario eliminado");
             limpiarFormulario();
-            refreshGrid();
+            actualizarGrid();
+        } else {
+            Notification.show("Selecciona un usuario de la lista");
         }
-    }
-
-    private void eliminar() {
-        if (usuarioSeleccionado == null) {
-            Notification.show("Selecciona un usuario de la tabla");
-            return;
-        }
-        usuarioDao.eliminar(usuarioSeleccionado.getId());
-        Notification.show("Usuario eliminado con éxito");
-        limpiarFormulario();
-        refreshGrid();
     }
 
     private void limpiarFormulario() {
-        txtNombre.clear();
-        txtEmail.clear();
         usuarioSeleccionado = null;
+        binder.readBean(null);
         grid.asSingleSelect().clear();
     }
 
-    private boolean validar() {
-        if (txtNombre.isEmpty() || txtEmail.isEmpty()) {
-            Notification.show("Todos los campos son obligatorios");
-            return false;
-        }
-        return true;
-    }
-
-    private void refreshGrid() {
+    private void actualizarGrid() {
         grid.setItems(usuarioDao.obtenerTodos());
     }
 }

@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.model.Espacios;
+import com.example.model.Espacio;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -17,7 +17,7 @@ import com.vaadin.flow.router.Route;
 public class EspaciosView extends VerticalLayout {
 
     // 1. Tabla para mostrar la lista de espacios (Operación Read)
-    private Grid<Espacios> grid = new Grid<>(Espacios.class);
+    private Grid<Espacio> grid = new Grid<>(Espacio.class);
 
     // 2. Campos del formulario con tipos de datos correctos (Validación de la rúbrica)
     private TextField txtNombre = new TextField("Nombre del Espacio");
